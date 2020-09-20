@@ -1,0 +1,45 @@
+<img id="img0" style="-webkit-user-select: none;margin: auto;cursor: pointer;"  width="150" height="150" onclick="openimg()">
+<img id="img1" style="-webkit-user-select: none;margin: auto;cursor: pointer;"  width="150" height="150" onclick="openimg()">
+<img id="img2" style="-webkit-user-select: none;margin: auto;cursor: pointer;"  width="150" height="150" onclick="openimg()">
+<img id="img3" style="-webkit-user-select: none;margin: auto;cursor: pointer;"  width="150" height="150" onclick="openimg()">
+<img id="img4" style="-webkit-user-select: none;margin: auto;cursor: pointer;"  width="150" height="150" onclick="openimg()">
+<img id="img5" style="-webkit-user-select: none;margin: auto;cursor: pointer;"  width="150" height="150" onclick="openimg()">
+<img id="img6" style="-webkit-user-select: none;margin: auto;cursor: pointer;"  width="150" height="150" onclick="openimg()">
+<img id="img7" style="-webkit-user-select: none;margin: auto;cursor: pointer;"  width="150" height="150" onclick="openimg()">
+<img id="img8" style="-webkit-user-select: none;margin: auto;cursor: pointer;"  width="150" height="150" onclick="openimg()">
+<img id="img9" style="-webkit-user-select: none;margin: auto;cursor: pointer;"  width="150" height="150" onclick="openimg()">
+<img id="img10" style="-webkit-user-select: none;margin: auto;cursor: pointer;"  width="150" height="150" onclick="openimg()">
+<img id="img11" style="-webkit-user-select: none;margin: auto;cursor: pointer;"  width="150" height="150" onclick="openimg()">
+<script>
+         function openimg() {
+        window.open("https://www.instagram.com/dutyhairsalon/?hl=en") }
+        let a = []
+        fetch("https://www.instagram.com/dutyhairsalon/?__a=1", {"method": "get"})
+            .then( (httpResponse) => {
+           
+            if (httpResponse.ok) {
+             
+                return httpResponse.json();
+            } else {
+            
+                return Promise.reject("Fetch did not succeed");
+            }
+        } )
+        .then(json =>{
+            // console.log(json.graphql.user.edge_owner_to_timeline_media.edges[0].node)
+            // console.log(json.graphql.user.edge_owner_to_timeline_media.edges[0].node.thumbnail_resources[4].src)
+            
+            json.graphql.user.edge_owner_to_timeline_media.edges.forEach(element=>{          
+                let image = element.node.thumbnail_resources[4].src
+                a.push(image)
+            })       
+        a.forEach((element,index)=>{
+            // console.log(index,element)
+            console.log(`img${index}`)
+            document.getElementById(`img${index}`).src=a[index]
+        })
+    })
+    .catch(err => console.log(err));
+
+
+</script>
